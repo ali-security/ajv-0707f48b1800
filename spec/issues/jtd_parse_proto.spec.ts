@@ -6,7 +6,10 @@ describe("JTD compileParser __proto__ key handling", () => {
   it("should not poison prototype with values schema", () => {
     const ajv = new _AjvJTD()
     const parse = ajv.compileParser({values: {}})
-    const data = parse('{"__proto__": {"injected": true}, "name": "Alice"}') as Record<string, unknown>
+    const data = parse('{"__proto__": {"injected": true}, "name": "Alice"}') as Record<
+      string,
+      unknown
+    >
     expect(data).to.have.own.property("name")
     expect(data.injected).to.equal(undefined)
     expect("injected" in data).to.equal(false)
@@ -18,7 +21,10 @@ describe("JTD compileParser __proto__ key handling", () => {
       properties: {name: {type: "string"}},
       additionalProperties: true,
     })
-    const data = parse('{"name": "Alice", "__proto__": {"injected": true}}') as Record<string, unknown>
+    const data = parse('{"name": "Alice", "__proto__": {"injected": true}}') as Record<
+      string,
+      unknown
+    >
     expect(data).to.have.own.property("name")
     expect(data.injected).to.equal(undefined)
     expect("injected" in data).to.equal(false)
