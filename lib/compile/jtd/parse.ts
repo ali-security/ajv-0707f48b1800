@@ -138,7 +138,7 @@ function parseElements(cxt: ParseCxt): void {
 function parseValues(cxt: ParseCxt): void {
   const {gen, schema, data} = cxt
   parseToken(cxt, "{")
-  gen.assign(data, _`{}`)
+  gen.assign(data, _`Object.create(null)`)
   parseItems(cxt, "}", () => parseKeyValue(cxt, schema.values))
 }
 
@@ -171,7 +171,7 @@ function parseDiscriminator(cxt: ParseCxt): void {
   const {gen, data, schema} = cxt
   const {discriminator, mapping} = schema
   parseToken(cxt, "{")
-  gen.assign(data, _`{}`)
+  gen.assign(data, _`Object.create(null)`)
   const startPos = gen.const("pos", N.jsonPos)
   const value = gen.let("value")
   const tag = gen.let("tag")
@@ -204,7 +204,7 @@ function parseDiscriminator(cxt: ParseCxt): void {
 function parseProperties(cxt: ParseCxt): void {
   const {gen, data} = cxt
   parseToken(cxt, "{")
-  gen.assign(data, _`{}`)
+  gen.assign(data, _`Object.create(null)`)
   parseSchemaProperties(cxt)
 }
 
