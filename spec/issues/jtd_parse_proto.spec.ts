@@ -2,8 +2,8 @@ import _AjvJTD from "../ajv_jtd"
 import chai from "../chai"
 const {expect} = chai
 
-describe("JTD compileParser __proto__ key handling", () => {
-  it("should not poison prototype with values schema", () => {
+describe("JTD compileParser with __proto__ key in JSON data", () => {
+  it("should not replace object prototype with values schema", () => {
     const ajv = new _AjvJTD()
     const parse = ajv.compileParser({values: {}})
     const data = parse('{"__proto__": {"injected": true}, "name": "Alice"}') as Record<
@@ -15,7 +15,7 @@ describe("JTD compileParser __proto__ key handling", () => {
     expect("injected" in data).to.equal(false)
   })
 
-  it("should not poison prototype with additionalProperties", () => {
+  it("should not replace object prototype with additionalProperties", () => {
     const ajv = new _AjvJTD()
     const parse = ajv.compileParser({
       properties: {name: {type: "string"}},
