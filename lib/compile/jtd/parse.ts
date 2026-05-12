@@ -259,7 +259,10 @@ function parsePropertyValue(cxt: ParseCxt, key: Name, schema: SchemaObject): voi
 function safeSet(gen: CodeGen, data: Code, key: Name, val: Name): void {
   gen.if(
     _`${key} === "__proto__"`,
-    () => gen.code(_`Object.defineProperty(${data}, ${key}, {value: ${val}, writable: true, enumerable: true, configurable: true})`),
+    () =>
+      gen.code(
+        _`Object.defineProperty(${data}, ${key}, {value: ${val}, writable: true, enumerable: true, configurable: true})`
+      ),
     () => gen.assign(_`${data}[${key}]`, val)
   )
 }
